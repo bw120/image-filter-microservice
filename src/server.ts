@@ -18,17 +18,17 @@ import { promises } from 'dns';
   app.get( "/filteredimage", async ( req, res ) => {
     const { image_url:imageUrl } = req.query;
     const urlRegex = new RegExp(/^(https?):\/\/[^\s$.?#].[^\s]*$/, 'g');
-    const isValidImageUrl = urlRegex.test(imageUrl);
+    const isValidImageUrl: boolean = urlRegex.test(imageUrl);
 
     if (!isValidImageUrl) {
       res.status(400).send("'image_url' is required and must be a valid url for an image");
     }
 
     try {
-      let image = await filterImageFromURL(imageUrl)
+      let image: string = await filterImageFromURL(imageUrl)
       res.status(200).sendFile(image);
       res.on('finish', () => deleteLocalFiles([image]));
-    } catch(err) {
+    } catch(error) {
       return res.status(422).send("There was an error processing the image. Check that your URL is a valid image and that it is in a supported format: jpg, png, bmp, tiff, or gif");
     }
   } );
