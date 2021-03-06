@@ -1,14 +1,18 @@
 # Udagram Image Filtering Microservice
 
 ### Endpoint on Elastic Beanstalk
-* Endpoint: http://image-filter-bwright-dev-dev.us-east-1.elasticbeanstalk.com/filteredimage?image_url=<em>{image url}</em>
-** Example: `http://image-filter-bwright-dev-dev.us-east-1.elasticbeanstalk.com/filteredimage?image_url=https://d3i6fh83elv35t.cloudfront.net/newshour/app/uploads/2017/03/GettyImages-654745934-1024x687.jpg`
+* **Endpoint:** `http://image-filter-bwright-dev-dev.us-east-1.elasticbeanstalk.com/filteredimage?image_url={{image url}}`
+* **Example:** http://image-filter-bwright-dev-dev.us-east-1.elasticbeanstalk.com/filteredimage?image_url=https://d3i6fh83elv35t.cloudfront.net/newshour/app/uploads/2017/03/GettyImages-654745934-1024x687.jpg
 
 ### Deployment screenshot
 ![Alt text](/deployment_screenshots/image-filter-service-deployed.png?raw=true "Image Filtering Microservice Deployed to Elastic Beanstalk")
 [screenshot](deployment_screenshots/image-filter-service-deployed.png)
-### Setup Node Environment
 
+### Changes from starter code
+* Added endpoint: `/filteredimage?image_url={{image url}}`
+* Updated 'filterImageFromURL' in `/src/util/util.ts` to handle promise rejection. Allowing the server to respond back faster with any issues. Rather than waiting for promise timeout.
+
+### Setup Node Environment
 You'll need to create a new node server. Open a new terminal within the project directory and run:
 
 1. Initialize a new project: `npm i`
